@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aihr4u
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: aihr4u
+  template:
+    metadata:
+      labels:
+        app: aihr4u
+    spec:
+      containers:
+        - name: aihr4u
+          image: 3.110.213.116.dkr.ecr.us-east-1.amazonaws.com/aihr4u:latest
+          ports:
+            - containerPort: 8000
+
