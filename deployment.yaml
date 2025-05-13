@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aihr4u
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: aihr4u
+  template:
+    metadata:
+      labels:
+        app: aihr4u
+    spec:
+      containers:
+        - name: aihr4u
+          image: 120569617239.dkr.ecr.ap-south-1.amazonaws.com/aihr4u:latest
+          ports:
+            - containerPort: 8000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: aihr4u-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: aihr4u
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8000
+
